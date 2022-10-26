@@ -15,8 +15,6 @@ struct pipe_structure {
     string repair_status;
 };
 
-vector <pipe_structure> pipe_vector;
-
 struct cs_structure {
     string name;
     int workshops;
@@ -24,15 +22,16 @@ struct cs_structure {
     int efficiency;
 };
 
+vector <pipe_structure> pipe_vector;
 vector <cs_structure> cs_vector;
 
-bool int_input_check(string inserted_num) {
+bool int_check(string inserted_num) {
     bool inserted_flag{0};
 
     if (inserted_num.length() > 0 ) {
         inserted_flag = 1;
-        for (int x = 0; x < inserted_num.length(); x++) {
-                if (isdigit(inserted_num[x]) == false) {
+        for (int i = 0; i < inserted_num.length(); i++) {
+                if (isdigit(inserted_num[i]) == false) {
                     inserted_flag = 0;
                     break;
                 }
@@ -53,7 +52,6 @@ int y_or_n_check(string user_input) {
 
         else if (user_input == "n" || user_input == "N") user_input_flag = 0;
     }
-
     else user_input_flag = 2;
 
     return user_input_flag;
@@ -78,7 +76,7 @@ void add_pipe() {
         cout << "Pipe length ~ ";
         getline(cin, new_pipe_len);
 
-        if (int_input_check(new_pipe_len) == 1) {
+        if (int_check(new_pipe_len) == 1) {
             if (stoi(new_pipe_len) > 0) break;
 
             else cout << "!! Incorrect value !!" << endl;
@@ -90,7 +88,7 @@ void add_pipe() {
         cout << "Pipe dimameter ~ ";
         getline(cin, new_pipe_dim);
 
-        if (int_input_check(new_pipe_dim) == 1) {
+        if (int_check(new_pipe_dim) == 1) {
             if (stoi(new_pipe_dim) > 0) break;
 
             else cout << "!! Incorrect value !!" << endl;
@@ -120,10 +118,10 @@ void add_pipe() {
     pipe_vector.push_back(pipe_structure{new_pipe_name,stoi(new_pipe_len), stoi(new_pipe_dim), pipe_tolower});
 
     cout << "\nNew pipe #" << pipe_vector.size()<< "\nName: " 
-    << pipe_vector[pipe_vector.size()-1].name <<"\nLength: " 
-    << pipe_vector[pipe_vector.size()-1].length 
-    << "\nDiameter: "<<pipe_vector[pipe_vector.size()-1].diameter
-    << "\nRepair status: " << pipe_vector[pipe_vector.size()-1].repair_status << endl;  
+    << pipe_vector[pipe_vector.size() - 1].name << "\nLength: " 
+    << pipe_vector[pipe_vector.size() - 1].length 
+    << "\nDiameter: "<< pipe_vector[pipe_vector.size() - 1].diameter
+    << "\nRepair status: " << pipe_vector[pipe_vector.size() - 1].repair_status << endl;  
 }
 
 
@@ -143,7 +141,7 @@ void add_cs() {
         cout << "Workshops ~ ";
         getline(cin, new_cs_workshops);
 
-        correct_input = int_input_check(new_cs_workshops);
+        correct_input = int_check(new_cs_workshops);
 
         if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
     }
@@ -152,7 +150,7 @@ void add_cs() {
         cout << "Workshops in work ~ ";
         getline(cin, new_cs_workshops_in_work);
 
-        correct_input = int_input_check(new_cs_workshops_in_work);
+        correct_input = int_check(new_cs_workshops_in_work);
 
         if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
 
@@ -168,7 +166,7 @@ void add_cs() {
         cout << "Efficiency in percentage ~ ";
         getline(cin, new_cs_efficiency);
 
-        correct_input = int_input_check(new_cs_efficiency);
+        correct_input = int_check(new_cs_efficiency);
 
         if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
         
@@ -179,13 +177,30 @@ void add_cs() {
         }
     }
 
-    cs_vector.push_back(cs_structure{new_cs_name,stoi(new_cs_workshops),
-    stoi(new_cs_workshops_in_work), stoi(new_cs_efficiency)});
+    cs_vector.push_back(cs_structure{new_cs_name,stoi(new_cs_workshops), stoi(new_cs_workshops_in_work), stoi(new_cs_efficiency)});
 
-    cout << "\nNew Compressor station #" << cs_vector.size()<<"\nName: " 
-    << cs_vector[cs_vector.size()-1].name << "\nWorkshops: "<< cs_vector[cs_vector.size()-1].workshops
+    cout << "\nNew Compressor station #" << cs_vector.size() << "\nName: " 
+    << cs_vector[cs_vector.size() - 1].name << "\nWorkshops: " << cs_vector[cs_vector.size() - 1].workshops
     << "\nWorkshops in work: " << cs_vector[cs_vector.size()-1].workshops_in_work <<
-    "\nEfficiency: " << cs_vector[cs_vector.size()-1].efficiency << endl;
+    "\nEfficiency: " << cs_vector[cs_vector.size() - 1].efficiency << endl;
+}
+
+
+void out_pipe(int id, string name, int len, int dim, string stat) {
+    cout << "\n\tPipe #" << id + 1<< ":"<< endl;
+    cout << "\tName: " << name << endl;
+    cout << "\tLength: " << len << endl;
+    cout << "\tDiameter: " << dim << endl;
+    cout << "\tRepair status: " << stat << endl;
+}
+
+
+void out_cs(int id, string name, int ws, int ws_i, int eff) {
+    cout << "\n\tCompressor station #" << id + 1<< ":"<< endl;
+    cout << "\tName: " << name << endl;
+    cout << "\tWorkshops: " << ws << endl;
+    cout << "\tWorkshops in work: " << ws_i << endl;
+    cout << "\tEfficiency: " << eff << endl; 
 }
 
 
@@ -197,7 +212,7 @@ void view_all_objects() {
     while (view_menu_flag) {
         cout << "\n1 - Search pipe\n2 - Search station\n3 - Display full list\n > ";
         getline(cin, view_menu_choice);
-        if (int_input_check(view_menu_choice) == 1) {
+        if (int_check(view_menu_choice) == 1) {
             if (stoi(view_menu_choice) >= 1 && stoi(view_menu_choice) <= 3) view_menu_flag = 0;
             else cout << "!! Value should be between (1, 3) !!" << endl;
         }
@@ -210,7 +225,7 @@ void view_all_objects() {
             cout << "\n1 - By name\n2 - By index\n3 - By repair status\n > ";
             getline(cin, search_pipe_by);
 
-            if (int_input_check(search_pipe_by) == 1) {
+            if (int_check(search_pipe_by) == 1) {
                 if (stoi(search_pipe_by) == 1 || stoi(search_pipe_by) == 2 || stoi(search_pipe_by) == 3) break;
                 else cout << "!! Value should be between (1, 3) !!" << endl;
             }
@@ -223,13 +238,10 @@ void view_all_objects() {
                 cout << "Name (press enter to exit)\n ~ ";
                 getline(cin,pipe_search_name);
                 if (pipe_search_name.length() != 0) {
-                    for (int i = 0; i < pipe_vector.size(); i++) {
+                    for (int i = 0; i < pipe_vector.size(); i++){
                         if (pipe_vector[i].name == pipe_search_name){
-                            cout << pipe_vector[i].name << endl;
-                            cout << pipe_vector[i].length << endl;
-                            cout << pipe_vector[i].diameter << endl;
-                            cout << pipe_vector[i].repair_status << endl;
-                            cout << "\n" << endl;
+                            out_pipe(i, pipe_vector[i].name,pipe_vector[i].length,
+                            pipe_vector[i].diameter, pipe_vector[i].repair_status);
                         }
                     }
                     break;
@@ -243,13 +255,12 @@ void view_all_objects() {
                 cout << "Index (press enter to exit)\n" << "Pipes: " << pipe_vector.size()
                 << endl;
                 getline(cin, pipe_search_id);
-                if (int_input_check(pipe_search_id) == 1) {
+                if (int_check(pipe_search_id) == 1) {
                     if (stoi(pipe_search_id) - 1 >= 0 && stoi(pipe_search_id) - 1 < pipe_vector.size()) {
-                        cout << pipe_vector[stoi(pipe_search_id) - 1].name << endl;
-                        cout << pipe_vector[stoi(pipe_search_id) - 1].length << endl;
-                        cout << pipe_vector[stoi(pipe_search_id) - 1].diameter << endl;
-                        cout << pipe_vector[stoi(pipe_search_id) - 1].repair_status << endl;
-                        cout << "\n" << endl;
+                        out_pipe(stoi(pipe_search_id)-1, pipe_vector[stoi(pipe_search_id)-1].name,
+                        pipe_vector[stoi(pipe_search_id)-1].length,
+                        pipe_vector[stoi(pipe_search_id)-1].diameter, 
+                        pipe_vector[stoi(pipe_search_id)-1].repair_status);
                     }
                     break;
                 }
@@ -271,13 +282,9 @@ void view_all_objects() {
                     [](unsigned char c_pipe_stat)
                     {return tolower(c_pipe_stat);});
                 for (int i = 0; i < pipe_vector.size(); i++) {
-                    if (pipe_vector[i].repair_status == pipe_tolower 
-                    || pipe_vector[i].repair_status == temp_pipe_stat_to_upper) {
-                        cout << pipe_vector[i].name << endl;
-                        cout << pipe_vector[i].length << endl;
-                        cout << pipe_vector[i].diameter << endl;
-                        cout << pipe_vector[i].repair_status << endl;
-                        cout << "\n" << endl;
+                    if (pipe_vector[i].repair_status == pipe_tolower || pipe_vector[i].repair_status == temp_pipe_stat_to_upper) {
+                        out_pipe(i, pipe_vector[i].name, pipe_vector[i].length,
+                        pipe_vector[i].diameter, pipe_vector[i].repair_status);
                     }
                 }
                 break; 
@@ -291,7 +298,7 @@ void view_all_objects() {
             cout << "\n1 - By name\n2 - By index\n3 - By percentage of unused workshops\n ~ ";
             getline(cin, search_cs_by);
 
-            if (int_input_check(search_cs_by) == 1) {
+            if (int_check(search_cs_by) == 1) {
                 if (stoi(search_cs_by) == 1 || stoi(search_cs_by) == 2 || stoi(search_cs_by) == 3) break;
                 else cout << "!! Value should be between (1, 3) !!" << endl;
             }
@@ -300,17 +307,14 @@ void view_all_objects() {
 
         switch (stoi(search_cs_by)) {
         case 1:
-            while(true) {
+            while (true) {
                 cout << "Name (press enter to exit)\n ~ ";
                 getline(cin,cs_search_name);
                 if (cs_search_name.length() != 0) {
                     for (int i = 0; i < cs_vector.size(); i++) {
                         if (cs_vector[i].name == cs_search_name) {
-                            cout << cs_vector[i].name << endl;
-                            cout << cs_vector[i].workshops << endl;
-                            cout << cs_vector[i].workshops_in_work << endl;
-                            cout << cs_vector[i].efficiency << endl;
-                            cout << "\n" << endl;
+                            out_cs(i, cs_vector[i].name, cs_vector[i].workshops,
+                            cs_vector[i].workshops_in_work, cs_vector[i].efficiency);
                         }
                     }
                     break;
@@ -324,13 +328,12 @@ void view_all_objects() {
             while (true) {
                 cout << "Index (press enter to exit)\n" << "Stations: " << cs_vector.size() << endl;
                 getline(cin, cs_search_id);
-                if (int_input_check(cs_search_id) == 1) {
-                    if (stoi(cs_search_id)-1 >= 0 && stoi(cs_search_id)-1 < cs_vector.size()){
-                        cout << cs_vector[stoi(cs_search_id)-1].name << endl;
-                        cout << cs_vector[stoi(cs_search_id)-1].workshops << endl;
-                        cout << cs_vector[stoi(cs_search_id)-1].workshops_in_work << endl;
-                        cout << cs_vector[stoi(cs_search_id)-1].efficiency << endl;
-                        cout << "\n" << endl;
+                if (int_check(cs_search_id) == 1) {
+                    if (stoi(cs_search_id) - 1 >= 0 && stoi(cs_search_id) - 1 < cs_vector.size()) {
+                        out_cs(stoi(cs_search_id) - 1, cs_vector[stoi(cs_search_id) - 1].name,
+                        cs_vector[stoi(cs_search_id) - 1].workshops,
+                        cs_vector[stoi(cs_search_id) - 1].workshops_in_work,
+                        cs_vector[stoi(cs_search_id) - 1].efficiency);
                     }
                     break;
                 }
@@ -341,7 +344,7 @@ void view_all_objects() {
             while (true) {
                 cout << "Enter percentage of unused workshops: ";
                 getline(cin, cs_search_percentage);
-                if (int_input_check(cs_search_percentage) == 1) {
+                if (int_check(cs_search_percentage) == 1) {
                     if (stoi(cs_search_percentage) >= 0 || stoi(cs_search_percentage) <= 100) break;
                     else cout << "!! Out of range !!" << endl;
                 } 
@@ -353,15 +356,11 @@ void view_all_objects() {
                 cout << "1 - Lower than " << cs_search_percentage << "%\n2 - Higher than " << cs_search_percentage << "%\n ~ ";
                 getline(cin, cs_percentage_low_or_high);
 
-                if (int_input_check(cs_percentage_low_or_high) == 1) {
+                if (int_check(cs_percentage_low_or_high) == 1) {
                     if (stoi(cs_percentage_low_or_high) == 1) {
                         for (int i = 0; i < cs_vector.size(); i++) {
                             if ((cs_vector[i].workshops - cs_vector[i].workshops_in_work)/cs_vector[i].workshops < stoi(cs_percentage_low_or_high)) {
-                                cout << cs_vector[i].name << endl;
-                                cout << cs_vector[i].workshops << endl;
-                                cout << cs_vector[i].workshops_in_work << endl;
-                                cout << cs_vector[i].efficiency << endl;
-                                cout << "\n" << endl;
+                                out_cs(i, cs_vector[i].name, cs_vector[i].workshops, cs_vector[i].workshops_in_work, cs_vector[i].efficiency);
                             }
                         }
                         break;
@@ -370,11 +369,7 @@ void view_all_objects() {
                     else if (stoi(cs_percentage_low_or_high) == 2) {
                         for (int i = 0; i < cs_vector.size(); i++) {
                             if ((cs_vector[i].workshops - cs_vector[i].workshops_in_work)/cs_vector[i].workshops > stoi(cs_percentage_low_or_high)) {
-                                cout << cs_vector[i].name << endl;
-                                cout << cs_vector[i].workshops << endl;
-                                cout << cs_vector[i].workshops_in_work << endl;
-                                cout << cs_vector[i].efficiency << endl;
-                                cout << "\n" << endl;
+                                out_cs(i, cs_vector[i].name, cs_vector[i].workshops, cs_vector[i].workshops_in_work, cs_vector[i].efficiency);
                             }
                         }
                         break;
@@ -389,21 +384,11 @@ void view_all_objects() {
 
     case 3:
         cout << "Pipes:\n" << endl;
-        for (int i = 0; i < pipe_vector.size(); i++) {
-            cout << pipe_vector[i].name << endl;
-            cout << pipe_vector[i].length << endl;
-            cout << pipe_vector[i].diameter << endl;
-            cout << pipe_vector[i].repair_status << endl;
-            cout << "\n" << endl;
-        }
+        for (int i = 0; i < pipe_vector.size(); i++) out_pipe(i, pipe_vector[i].name, pipe_vector[i].length, pipe_vector[i].diameter, pipe_vector[i].repair_status);
+        
         cout << "Compressor stations:\n" << endl;
-        for (int i = 0; i < cs_vector.size(); i++) {
-            cout << cs_vector[i].name << endl;
-            cout << cs_vector[i].workshops << endl;
-            cout << cs_vector[i].workshops_in_work << endl;
-            cout << cs_vector[i].efficiency << endl;
-            cout << "\n" << endl;
-        }
+        for (int i = 0; i < cs_vector.size(); i++) out_cs(i, cs_vector[i].name, cs_vector[i].workshops, cs_vector[i].workshops_in_work,cs_vector[i].efficiency);
+
         break;
     }    
 }
@@ -417,28 +402,24 @@ void edit_pipe() {
         getline(cin, pipe_id_to_edit);
         if (pipe_id_to_edit.length() == 0) break;
 
-        else if (int_input_check(pipe_id_to_edit) == 1) {
-            if (stoi(pipe_id_to_edit)-1 >= 0 && stoi(pipe_id_to_edit)-1 < pipe_vector.size()) break;
+        else if (int_check(pipe_id_to_edit) == 1) {
+            if (stoi(pipe_id_to_edit) - 1 >= 0 && stoi(pipe_id_to_edit) - 1 < pipe_vector.size()) break;
             else cout << "!! Out of range !!" << endl;
         }
-        else cout << "!! Integer expected !!" << endl;
+        else cout << "!! Incorrect value !!" << endl;
     }
 
     if (pipe_id_to_edit.length() != 0) {
-        cout << "Pipe #" << pipe_id_to_edit << ":"<< endl;
-        cout << pipe_vector[stoi(pipe_id_to_edit)-1].name << endl;
-        cout << pipe_vector[stoi(pipe_id_to_edit)-1].length << endl;
-        cout << pipe_vector[stoi(pipe_id_to_edit)-1].diameter << endl;
-        cout << pipe_vector[stoi(pipe_id_to_edit)-1].repair_status << endl;
-        cout << "\n" << endl;
+        out_pipe(stoi(pipe_id_to_edit) - 1, pipe_vector[stoi(pipe_id_to_edit) - 1].name, pipe_vector[stoi(pipe_id_to_edit) - 1].length,
+        pipe_vector[stoi(pipe_id_to_edit) - 1].diameter, pipe_vector[stoi(pipe_id_to_edit) - 1].repair_status);
     }
     else return;
 
     while (true) {
-        cout << "Select parameter of pipe:\n1 - Name\n2 - Length\n3 - Diameter\n4 - Repair status\n ~ ";
+        cout << "Select parameter of Pipe:\n1 - Name\n2 - Length\n3 - Diameter\n4 - Repair status\n ~ ";
         getline(cin, pipe_parameter_to_edit);
 
-        if (int_input_check(pipe_parameter_to_edit) == 1) {
+        if (int_check(pipe_parameter_to_edit) == 1) {
             if (stoi(pipe_parameter_to_edit) >= 1 && stoi(pipe_parameter_to_edit) <= 4) break;
             else cout << "!! Out of range !!" << endl;
         }
@@ -446,7 +427,6 @@ void edit_pipe() {
     }
 
     switch (stoi(pipe_parameter_to_edit)) {
-
     case 1:
         while (true) {
             cout << "New pipe name ~ ";
@@ -459,13 +439,12 @@ void edit_pipe() {
             else cout << "!! Name can't be empty !!" << endl;
         }
         break;
-
     case 2:
         while (true) {
             cout << "New pipe length ~ ";
             getline(cin, new_pipe_lenght);
 
-            if (int_input_check(new_pipe_lenght) == 1) {
+            if (int_check(new_pipe_lenght) == 1) {
                 if (stoi(new_pipe_lenght) > 0) {
                     pipe_vector[stoi(pipe_id_to_edit)-1].length = stoi(new_pipe_lenght);
                     break;
@@ -481,9 +460,9 @@ void edit_pipe() {
             cout << "New pipe diameter ~ ";
             getline(cin, new_pipe_diameter);
 
-            if (int_input_check(new_pipe_diameter) == 1) {
+            if (int_check(new_pipe_diameter) == 1) {
                 if (stoi(new_pipe_diameter) > 0) {
-                    pipe_vector[stoi(pipe_id_to_edit)-1].diameter = stoi(new_pipe_diameter);
+                    pipe_vector[stoi(pipe_id_to_edit) - 1].diameter = stoi(new_pipe_diameter);
                     break;
                 } 
                 else cout << "!! Diameter should be bigger than 0 !!";
@@ -514,7 +493,195 @@ void edit_pipe() {
 
 
 void edit_cs() {
+    string cs_id_to_edit, cs_parameter_to_edit, new_cs_name, new_cs_workshops, new_cs_workshops_in_work, new_cs_efficiency;
+    bool correct_input{0};
 
+    while (true) {
+        cout << "Id of station ("<< cs_vector.size()<<" stations in stock)\n(press enter to exit) ~ ";
+        getline(cin, cs_id_to_edit);
+        if (cs_id_to_edit.length() == 0) break;
+        
+        else if (int_check(cs_id_to_edit) == 1) {
+            if (stoi(cs_id_to_edit)-1 >= 0 && stoi(cs_id_to_edit)-1 < cs_vector.size()){
+                break;
+            }
+            else cout << "!! Out of range !!" << endl;
+        }
+        else cout << "!! Incorrect value !!" << endl;
+    }
+    if (cs_id_to_edit.length() != 0) {
+        out_cs(stoi(cs_id_to_edit) - 1, cs_vector[stoi(cs_id_to_edit) - 1].name,
+        cs_vector[stoi(cs_id_to_edit) - 1].workshops, cs_vector[stoi(cs_id_to_edit) - 1].workshops_in_work,
+        cs_vector[stoi(cs_id_to_edit) - 1].efficiency);
+
+    }
+    else return;
+
+    while (true) {
+        cout << "\nSelect parameter of pipe:\n1 - Name\n2 - Workshops\n3 - Workshops in work"
+        << "\n4 - Efficiency\n ~ ";
+        getline(cin, cs_parameter_to_edit);
+
+        if (int_check(cs_parameter_to_edit) == 1) {
+            if (stoi(cs_parameter_to_edit) >= 1 && stoi(cs_parameter_to_edit) <= 4) break;
+            else cout << "!! Out of range !!" << endl;
+        } 
+        else cout << "!! Incorrect value !!" << endl;
+    }
+
+    switch (stoi(cs_parameter_to_edit)) {
+    case 1:
+        while (true) {
+            cout << "Station name ~ ";
+            getline(cin, new_cs_name);
+
+            if (new_cs_name.length() > 0) break;
+        }
+        cs_vector[stoi(cs_id_to_edit)-1].name = new_cs_name;
+        break;
+    case 2:
+        while(correct_input != 1) {
+            cout << "Workshops ~ ";
+            getline(cin, new_cs_workshops);
+
+            correct_input = int_check(new_cs_workshops);
+
+            if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
+        }
+        cs_vector[stoi(cs_id_to_edit) - 1].workshops = stoi(new_cs_workshops);
+        break;
+    case 3:
+        while (true) {
+            cout << "Workshops in work ~ ";
+            getline(cin, new_cs_workshops_in_work);
+            correct_input = int_check(new_cs_workshops_in_work);
+            if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
+            else if (correct_input == 1) {
+                if (stoi(new_cs_workshops_in_work) > cs_vector[stoi(cs_id_to_edit) - 1].workshops) 
+                cout << "!! Number of workshops in work can't exceed the total number of workshops !!" << endl;
+                else break;
+            }
+        }
+        cs_vector[stoi(cs_id_to_edit) - 1].workshops_in_work = stoi(new_cs_workshops_in_work);
+        break;
+    case 4:
+        while(true) {
+            cout << "Efficiency in percentage ~ ";
+            getline(cin, new_cs_efficiency);
+
+            correct_input = int_check(new_cs_efficiency);
+
+            if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
+            else if (correct_input == 1) {
+                if (stoi(new_cs_efficiency) >= 0 && stoi(new_cs_efficiency)<= 100) break;
+                else cout << "!! Percentage value should be between (0, 100) !!" << endl;
+            }
+        }
+        cs_vector[stoi(cs_id_to_edit) - 1].efficiency = stoi(new_cs_efficiency);
+        break;
+    }
+}
+
+
+inline bool for_save_files (const std::string& name) {
+    if (FILE *file = fopen(name.c_str(), "r")) {
+        fclose(file);
+        return true;
+    }
+    else return false; 
+}
+
+
+void save_file() {
+    fstream config;
+    string config_name, rewrite_status;
+    bool rewrite_status_check{1};
+
+    cout << "\nFile name ~ ";
+    getline(cin, config_name);
+
+        if (for_save_files(config_name+".txt") == 1) {
+        while (true) {
+            cout << "Are sure you want to rewrite the file? [Y/N] ~ ";
+            getline(cin, rewrite_status);
+
+            if (y_or_n_check(rewrite_status) == 1){
+                rewrite_status_check = 1;
+                break;
+            }
+            else if (y_or_n_check(rewrite_status) == 0) {
+                rewrite_status_check = 0;
+                break;
+            } 
+            else cout << "Error while entering a variable!" << endl;
+        }            
+    }
+
+    if (rewrite_status_check == 1){
+        config.open(config_name + ".txt", ios::out);
+
+        for (int i = 0; i < pipe_vector.size(); i++) {
+        config << ", p," << pipe_vector[i].name << "," << pipe_vector[i].length <<
+        "," <<  pipe_vector[i].diameter << "," << pipe_vector[i].repair_status << endl;
+        }
+        for (int i = 0; i < cs_vector.size(); i++) {
+            config << ", c," << cs_vector[i].name << "," << cs_vector[i].workshops <<
+            "," <<  cs_vector[i].workshops_in_work << "," << cs_vector[i].efficiency << endl;
+        }
+        config.close();
+    }
+}
+
+
+int load_file() {
+    string loadname, tempstr, line;
+    ifstream loadfile;
+    int wordcount;
+    bool file_load_suc_status;
+
+    cout << "File name ~ ";
+    getline(cin, loadname);
+
+    loadfile.open(loadname + ".txt");
+
+    if (loadfile) {
+        while (loadfile >> tempstr) {
+            string ptempname, ptemplen, ptempdim, ptempstat,
+            ctempname, ctempwork, ctempworkon, ctempeff;
+
+            getline(loadfile, line);
+            wordcount = 0;
+
+            if (string(1, line[1]) == "p") {
+                for (int i = 3; i < line.length(); i++) {
+                    if (string(1, line[i]) != "," && wordcount == 0) ptempname += string(1, line[i]);
+                    else if (string(1, line[i]) == ",") wordcount += 1;
+                    else if (string(1, line[i]) != "," && wordcount == 1) ptemplen += string(1, line[i]);
+                    else if (string(1, line[i]) != "," && wordcount == 2) ptempdim += string(1, line[i]);
+                    else if (string(1, line[i]) != "," && wordcount == 3) ptempstat += string(1, line[i]);
+                }
+                pipe_vector.push_back(pipe_structure{ptempname,stoi(ptemplen), stoi(ptempdim), ptempstat});
+            }
+
+            else if (string(1, line[1]) == "c") {
+                for (int i = 3; i < line.length(); i++) {
+                    if (string(1, line[i]) != "," && wordcount == 0) ctempname += string(1, line[i]);
+                    else if (string(1, line[i]) == ",") wordcount += 1;
+                    else if (string(1, line[i]) != "," && wordcount == 1) ctempwork += string(1, line[i]);
+                    else if (string(1, line[i]) != "," && wordcount == 2) ctempworkon += string(1, line[i]);
+                    else if (string(1, line[i]) != "," && wordcount == 3) ctempeff += string(1, line[i]);
+                }
+                cs_vector.push_back(cs_structure{ctempname, stoi(ctempwork), stoi(ctempworkon), stoi(ctempeff)});
+            }
+        }
+        loadfile.close();
+        return 1;
+    }
+
+    else {
+        cout << "!! File with such name wasn't found !!" << endl;
+        return 0;
+    }
 }
 
 
@@ -560,10 +727,11 @@ int menu() {
 
 
 int main() {
-    int user_choice_in_main_menu;
-    bool program_cycle{1}, file_saved_status{1};
-    string load_without_saving_string;
 
+    int user_choice_in_main_menu;
+    bool program_cycle{1}, file_saved_status{1}, load_without_save{0}, success_load;
+    string load_without_saving_string, exit_without_saving_string;
+ 
     while (program_cycle) {
         user_choice_in_main_menu = menu();
 
@@ -592,10 +760,30 @@ int main() {
                 file_saved_status = 0;
                 break;
             case 6:
-                // func to save();
+                save_file();
                 file_saved_status = 1;
                 break;
             case 7:
+                load_without_save = 0;
+                if (file_saved_status == 0){
+                    while (true) {
+                        cout << "Are you sure you want to load file without saving? [Y/N] ~ ";
+                        getline(cin , load_without_saving_string);
+                        if (y_or_n_check(load_without_saving_string) == 1) {
+                            load_without_save = 1;
+                            break;
+                        } 
+                        else if (y_or_n_check(load_without_saving_string) == 0){
+                            load_without_save = 0;
+                            break;
+                        } 
+                        else cout << "!! Incorrect value !!" << endl;
+                    }
+                }
+                if (file_saved_status == 1 || load_without_save == 1) {        
+                    success_load = load_file();
+                    if (success_load == 1) file_saved_status = 0;
+                }
                 break;
         }
     }
