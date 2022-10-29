@@ -65,44 +65,44 @@ void add_pipe() {
     string new_pipe_name, new_pipe_dim, new_pipe_len, new_pipe_stat, pipe_tolower;
 
     while (true) {
-        cout << "Pipe name ~ ";
+        cout << "Название Трубы ~ ";
         getline(cin, new_pipe_name);
 
         if (new_pipe_name.length() > 0) break;
-        else cout << "!! Please write something !!" << endl;
+        else cout << "!! Пожалуйста напишите что-нибудь !!" << endl;
     }
 
     while (true) {
-        cout << "Pipe length ~ ";
+        cout << "Длина Трубы ~ ";
         getline(cin, new_pipe_len);
 
         if (int_check(new_pipe_len) == 1) {
             if (stoi(new_pipe_len) > 0) break;
 
-            else cout << "!! Incorrect value !!" << endl;
+            else cout << "!! Некорректное значение !!" << endl;
         }
-        else cout << "!! Incorrect value !!" << endl;
+        else cout << "!! Некорректное значение !!" << endl;
     }
 
     while (true) {
-        cout << "Pipe dimameter ~ ";
+        cout << "Диаметр Трубы ~ ";
         getline(cin, new_pipe_dim);
 
         if (int_check(new_pipe_dim) == 1) {
             if (stoi(new_pipe_dim) > 0) break;
 
-            else cout << "!! Incorrect value !!" << endl;
+            else cout << "!! Некорректное значение !!" << endl;
         }
-        else cout << "!! Incorrect value !!" << endl;
+        else cout << "!! Некорректное значение !!" << endl;
     }
 
     while (true) {
-        cout << "Repair status [Y/N] ~ ";
+        cout << "В ремонте [Y/N] ~ ";
         getline(cin, new_pipe_stat);
 
         bool_input_check = y_or_n_check(new_pipe_stat);
 
-        if (bool_input_check == 2) cout << "!! Incorrect value !!" << endl;
+        if (bool_input_check == 2) cout << "!! Некорректное значение !!" << endl;
 
         else {
             pipe_tolower = new_pipe_stat;
@@ -117,11 +117,11 @@ void add_pipe() {
 
     pipe_vector.push_back(pipe_structure{new_pipe_name,stoi(new_pipe_len), stoi(new_pipe_dim), pipe_tolower});
 
-    cout << "\nNew pipe #" << pipe_vector.size()<< "\nName: " 
-    << pipe_vector[pipe_vector.size() - 1].name << "\nLength: " 
+    cout << "\nТруба #" << pipe_vector.size()<< "\nНазвание: " 
+    << pipe_vector[pipe_vector.size() - 1].name << "\nДлина: " 
     << pipe_vector[pipe_vector.size() - 1].length 
-    << "\nDiameter: "<< pipe_vector[pipe_vector.size() - 1].diameter
-    << "\nRepair status: " << pipe_vector[pipe_vector.size() - 1].repair_status << endl;  
+    << "\nДиаметр: "<< pipe_vector[pipe_vector.size() - 1].diameter
+    << "\nВ ремонте: " << pipe_vector[pipe_vector.size() - 1].repair_status << endl;  
 }
 
 
@@ -130,77 +130,77 @@ void add_cs() {
     string new_cs_name, new_cs_workshops, new_cs_workshops_in_work, new_cs_efficiency;
 
     while (true) {
-        cout << "Compressor Station name ~ ";
+        cout << "Название КС ~ ";
         getline(cin, new_cs_name);
 
         if (new_cs_name.length() > 0) break;
-        else cout << "!! Please write something !!" << endl;
+        else cout << "!! Пожалуйста напишите что-нибудь !!" << endl;
     }
 
     while (correct_input != 1) {
-        cout << "Workshops ~ ";
+        cout << "Кол-во заводов ~ ";
         getline(cin, new_cs_workshops);
 
         correct_input = int_check(new_cs_workshops);
 
-        if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
+        if (correct_input == 0) cout << "!! Некорректное значение !!" << endl;
     }
 
     while (true) {
-        cout << "Workshops in work ~ ";
+        cout << "Кол-во работающих заводов ~ ";
         getline(cin, new_cs_workshops_in_work);
 
         correct_input = int_check(new_cs_workshops_in_work);
 
-        if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
+        if (correct_input == 0) cout << "!! Некорректное значение !!" << endl;
 
         else if (correct_input == 1) {
             if (stoi(new_cs_workshops_in_work) > stoi(new_cs_workshops)) {
-                cout << "!! Number of workshops in work can't exceed the total number of workshops !!" << endl;
+                cout << "!! Кол-во рабочих заводов не может превышать общее кол-во заводов !!" << endl;
             }
             else break;
         }
     }
 
     while (true) {
-        cout << "Efficiency in percentage ~ ";
+        cout << "Эффективность (%) ~ ";
         getline(cin, new_cs_efficiency);
 
         correct_input = int_check(new_cs_efficiency);
 
-        if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
+        if (correct_input == 0) cout << "!! Некорректное значение !!" << endl;
         
         else if (correct_input == 1) {
             if (stoi(new_cs_efficiency) >= 0 && stoi(new_cs_efficiency)<= 100) break;
 
-            else cout << "!! Percentage value should be between (0, 100) !!" << endl;
+            else cout << "!! Значение должно быть в пределах (0, 100) !!" << endl;
         }
     }
 
     cs_vector.push_back(cs_structure{new_cs_name,stoi(new_cs_workshops), stoi(new_cs_workshops_in_work), stoi(new_cs_efficiency)});
 
-    cout << "\nNew Compressor station #" << cs_vector.size() << "\nName: " 
-    << cs_vector[cs_vector.size() - 1].name << "\nWorkshops: " << cs_vector[cs_vector.size() - 1].workshops
-    << "\nWorkshops in work: " << cs_vector[cs_vector.size()-1].workshops_in_work <<
-    "\nEfficiency: " << cs_vector[cs_vector.size() - 1].efficiency << endl;
+    cout << "\nКомпрессорная Станция #" << cs_vector.size() << "\nНазвание: " 
+    << cs_vector[cs_vector.size() - 1].name << "\nКол-во заводов: " << cs_vector[cs_vector.size() - 1].workshops
+    << "\nКол-во работающих заводов: " << cs_vector[cs_vector.size()-1].workshops_in_work <<
+    "\nЭффективность: " << cs_vector[cs_vector.size() - 1].efficiency << endl;
 }
 
 
 void out_pipe(int id, string name, int len, int dim, string stat) {
-    cout << "\n\tPipe #" << id + 1<< ":"<< endl;
-    cout << "\tName: " << name << endl;
-    cout << "\tLength: " << len << endl;
-    cout << "\tDiameter: " << dim << endl;
-    cout << "\tRepair status: " << stat << endl;
+    cout << "\n\tТруба #" << id + 1<< ":"<< endl;
+    cout << "\tНазвание: " << name << endl;
+    cout << "\tДлина: " << len << endl;
+    cout << "\tДиаметр: " << dim << endl;
+    cout << "\tВ ремонте: " << stat << endl;
 }
 
 
 void out_cs(int id, string name, int ws, int ws_i, int eff) {
-    cout << "\n\tCompressor station #" << id + 1<< ":"<< endl;
-    cout << "\tName: " << name << endl;
-    cout << "\tWorkshops: " << ws << endl;
-    cout << "\tWorkshops in work: " << ws_i << endl;
-    cout << "\tEfficiency: " << eff << endl; 
+    cout << "\n\tКС #" << id + 1<< ":"<< endl;
+    cout << "\tНазвание: " << name << endl;
+    cout << "\tКол-во заводов: " << ws << endl;
+    cout << "\tКол-во работающих заводов: " << ws_i << endl;
+    cout << "\tЭффективность: " << eff << endl; 
 }
 
 
@@ -210,32 +210,32 @@ void view_all_objects() {
     search_cs_by, cs_search_name, cs_search_id, cs_search_percentage, cs_percentage_low_or_high;
 
     while (view_menu_flag) {
-        cout << "\n1 - Search pipe\n2 - Search station\n3 - Display full list\n > ";
+        cout << "\n1 - Найти Трубу\n2 - Найти КС\n3 - Все объекты\n ~ ";
         getline(cin, view_menu_choice);
         if (int_check(view_menu_choice) == 1) {
             if (stoi(view_menu_choice) >= 1 && stoi(view_menu_choice) <= 3) view_menu_flag = 0;
-            else cout << "!! Value should be between (1, 3) !!" << endl;
+            else cout << "!! Значение должно быть в пределах (1, 3) !!" << endl;
         }
-        else cout << "!! Value should be between (1, 3) !!" << endl;
+        else cout << "!! Значение должно быть в пределах (1, 3) !!" << endl;
     }
 
     switch (stoi(view_menu_choice)) {
     case 1:
         while (true) {
-            cout << "\n1 - By name\n2 - By index\n3 - By repair status\n > ";
+            cout << "\n1 - По имени\n2 - По индексу\n3 - По статусу 'В ремонте'\n~ ";
             getline(cin, search_pipe_by);
 
             if (int_check(search_pipe_by) == 1) {
                 if (stoi(search_pipe_by) == 1 || stoi(search_pipe_by) == 2 || stoi(search_pipe_by) == 3) break;
-                else cout << "!! Value should be between (1, 3) !!" << endl;
+                else cout << "!! Значение должно быть в пределах (1, 3) !!" << endl;
             }
-            else cout << "!! Value should be between (1, 3) !!" << endl;
+            else cout << "!! Значение должно быть в пределах (1, 3) !!" << endl;
         }
 
         switch (stoi(search_pipe_by)) {
         case 1:
             while (true) {
-                cout << "Name (press enter to exit)\n ~ ";
+                cout << "Название\n~ ";
                 getline(cin,pipe_search_name);
                 if (pipe_search_name.length() != 0) {
                     for (int i = 0; i < pipe_vector.size(); i++){
@@ -252,8 +252,7 @@ void view_all_objects() {
 
         case 2:
             while (true) {
-                cout << "Index (press enter to exit)\n" << "Pipes: " << pipe_vector.size()
-                << endl;
+                cout << "Всего Труб: " << pipe_vector.size() << "\nИндекс Трубы ~ ";
                 getline(cin, pipe_search_id);
                 if (int_check(pipe_search_id) == 1) {
                     if (stoi(pipe_search_id) - 1 >= 0 && stoi(pipe_search_id) - 1 < pipe_vector.size()) {
@@ -269,7 +268,7 @@ void view_all_objects() {
 
         case 3:
             while (true) {
-                cout << "Repair status [Y/N] (press enter to exit)\n" << endl;
+                cout << "В ремонте [Y/N]?\n~ ";
                 getline(cin, pipe_search_stat);
                 string pipe_tolower = pipe_search_stat;
                 string temp_pipe_stat_to_upper = pipe_search_stat;
@@ -295,20 +294,20 @@ void view_all_objects() {
 
     case 2:
         while (true) {
-            cout << "\n1 - By name\n2 - By index\n3 - By percentage of unused workshops\n ~ ";
+            cout << "\n1 - По имени\n2 - По индексу\n3 - По неработающим заводам\n~ ";
             getline(cin, search_cs_by);
 
             if (int_check(search_cs_by) == 1) {
                 if (stoi(search_cs_by) == 1 || stoi(search_cs_by) == 2 || stoi(search_cs_by) == 3) break;
-                else cout << "!! Value should be between (1, 3) !!" << endl;
+                else cout << "!! Значение должно быть в пределах (1, 3) !!" << endl;
             }
-            else cout << "!!! Value should be between (1, 3) !!" << endl;
+            else cout << "!! Значение должно быть в пределах (1, 3) !!" << endl;
         }
 
         switch (stoi(search_cs_by)) {
         case 1:
             while (true) {
-                cout << "Name (press enter to exit)\n ~ ";
+                cout << "Название\n~ ";
                 getline(cin,cs_search_name);
                 if (cs_search_name.length() != 0) {
                     for (int i = 0; i < cs_vector.size(); i++) {
@@ -326,7 +325,7 @@ void view_all_objects() {
 
         case 2:
             while (true) {
-                cout << "Index (press enter to exit)\n" << "Stations: " << cs_vector.size() << endl;
+                cout << "Всего КС: " << cs_vector.size() << "\nИндекс ~";
                 getline(cin, cs_search_id);
                 if (int_check(cs_search_id) == 1) {
                     if (stoi(cs_search_id) - 1 >= 0 && stoi(cs_search_id) - 1 < cs_vector.size()) {
@@ -342,18 +341,18 @@ void view_all_objects() {
 
         case 3:
             while (true) {
-                cout << "Enter percentage of unused workshops: ";
+                cout << "Введите процент неработающих заводов ~ ";
                 getline(cin, cs_search_percentage);
                 if (int_check(cs_search_percentage) == 1) {
                     if (stoi(cs_search_percentage) >= 0 || stoi(cs_search_percentage) <= 100) break;
-                    else cout << "!! Out of range !!" << endl;
+                    else cout << "!! Некорректное значение !!" << endl;
                 } 
 
-                else cout << "!! Incorrect value !!" << endl;
+                else cout << "!! Некорректное значение !!" << endl;
             }
 
             while (true) {
-                cout << "1 - Lower than " << cs_search_percentage << "%\n2 - Higher than " << cs_search_percentage << "%\n ~ ";
+                cout << "1 - Меньше чем " << cs_search_percentage << "%\n2 - Больше чем " << cs_search_percentage << "%\n~ ";
                 getline(cin, cs_percentage_low_or_high);
 
                 if (int_check(cs_percentage_low_or_high) == 1) {
@@ -375,7 +374,7 @@ void view_all_objects() {
                         break;
                     }
 
-                    else cout << "!! Out of range !!" << endl;
+                    else cout << "!! Некорректное значение !!" << endl;
                 }
             }       
             break;
@@ -383,10 +382,10 @@ void view_all_objects() {
         break;
 
     case 3:
-        cout << "Pipes:\n" << endl;
+        cout << "Трубы:\n" << endl;
         for (int i = 0; i < pipe_vector.size(); i++) out_pipe(i, pipe_vector[i].name, pipe_vector[i].length, pipe_vector[i].diameter, pipe_vector[i].repair_status);
         
-        cout << "Compressor stations:\n" << endl;
+        cout << "КС:\n" << endl;
         for (int i = 0; i < cs_vector.size(); i++) out_cs(i, cs_vector[i].name, cs_vector[i].workshops, cs_vector[i].workshops_in_work,cs_vector[i].efficiency);
 
         break;
@@ -398,15 +397,15 @@ void edit_pipe() {
     string pipe_id_to_edit, pipe_parameter_to_edit, new_pipe_name, new_pipe_lenght, new_pipe_diameter, new_pipe_repair_stat, pipe_tolower;
 
     while (true) {
-        cout << "Id of pipe ("<< pipe_vector.size()<<" pipes in stock)\n(press enter to exit) ~ ";
+        cout << "Номер Трубы (Всего Труб: "<< pipe_vector.size()<<")\n~ ";
         getline(cin, pipe_id_to_edit);
         if (pipe_id_to_edit.length() == 0) break;
 
         else if (int_check(pipe_id_to_edit) == 1) {
             if (stoi(pipe_id_to_edit) - 1 >= 0 && stoi(pipe_id_to_edit) - 1 < pipe_vector.size()) break;
-            else cout << "!! Out of range !!" << endl;
+            else cout << "!! Некорректное значение !!" << endl;
         }
-        else cout << "!! Incorrect value !!" << endl;
+        else cout << "!! Некорректное значение !!" << endl;
     }
 
     if (pipe_id_to_edit.length() != 0) {
@@ -416,32 +415,32 @@ void edit_pipe() {
     else return;
 
     while (true) {
-        cout << "Select parameter of Pipe:\n1 - Name\n2 - Length\n3 - Diameter\n4 - Repair status\n ~ ";
+        cout << "Выберите параметр Трубы:\n1 - Название\n2 - Длина\n3 - Диаметр\n4 - В ремонте\n ~ ";
         getline(cin, pipe_parameter_to_edit);
 
         if (int_check(pipe_parameter_to_edit) == 1) {
             if (stoi(pipe_parameter_to_edit) >= 1 && stoi(pipe_parameter_to_edit) <= 4) break;
-            else cout << "!! Out of range !!" << endl;
+            else cout << "!! Значение должно быть в пределах (1, 4) !!" << endl;
         }
-        else cout << "!! Incorrect value !!" << endl;
+        else cout << "!! Некорректное значение !!" << endl;
     }
 
     switch (stoi(pipe_parameter_to_edit)) {
     case 1:
         while (true) {
-            cout << "New pipe name ~ ";
+            cout << "Название Трубы ~ ";
             getline(cin, new_pipe_name);
 
             if (new_pipe_name.length() > 0) {
                 pipe_vector[stoi(pipe_id_to_edit)-1].name = new_pipe_name;
                 break;
             } 
-            else cout << "!! Name can't be empty !!" << endl;
+            else cout << "!! Название не может быть пустым !!" << endl;
         }
         break;
     case 2:
         while (true) {
-            cout << "New pipe length ~ ";
+            cout << "Длина Трубы ~ ";
             getline(cin, new_pipe_lenght);
 
             if (int_check(new_pipe_lenght) == 1) {
@@ -449,15 +448,15 @@ void edit_pipe() {
                     pipe_vector[stoi(pipe_id_to_edit)-1].length = stoi(new_pipe_lenght);
                     break;
                 }
-                else cout << "!! Length should be bigger than 0 !!";
+                else cout << "!! Длина должна быть больше 0 !!";
             } 
-            else cout << "!! Incorrect value !!" << endl;
+            else cout << "!! Некорректное значение !!" << endl;
         }
         break;
 
     case 3:
         while (true) {
-            cout << "New pipe diameter ~ ";
+            cout << "Диаметр Трубы ~ ";
             getline(cin, new_pipe_diameter);
 
             if (int_check(new_pipe_diameter) == 1) {
@@ -465,15 +464,15 @@ void edit_pipe() {
                     pipe_vector[stoi(pipe_id_to_edit) - 1].diameter = stoi(new_pipe_diameter);
                     break;
                 } 
-                else cout << "!! Diameter should be bigger than 0 !!";
+                else cout << "!! Диаметр должен быть больше 0 !!";
             } 
-            else cout << "!! Incorrect value !!" << endl;
+            else cout << "!! Некорректное значение !!" << endl;
         }
         break;
 
     case 4:
         while(true) {
-            cout << "Repair status [Y/N] ~ ";
+            cout << "В ремонте [Y/N] ~ ";
             getline(cin, new_pipe_repair_stat);
 
             if (y_or_n_check(new_pipe_repair_stat) != 2) {
@@ -485,7 +484,7 @@ void edit_pipe() {
                 pipe_vector[stoi(pipe_id_to_edit)-1].repair_status = pipe_tolower;
                 break;
             }
-            else cout << "!! Incorrect value !!" << endl;
+            else cout << "!! Некорректное значение !!" << endl;
         }
         break;
     }
@@ -497,7 +496,7 @@ void edit_cs() {
     bool correct_input{0};
 
     while (true) {
-        cout << "Id of station ("<< cs_vector.size()<<" stations in stock)\n(press enter to exit) ~ ";
+        cout << "Номер КС (Всего КС: "<< cs_vector.size()<<")\n~ ";
         getline(cin, cs_id_to_edit);
         if (cs_id_to_edit.length() == 0) break;
         
@@ -505,9 +504,9 @@ void edit_cs() {
             if (stoi(cs_id_to_edit)-1 >= 0 && stoi(cs_id_to_edit)-1 < cs_vector.size()){
                 break;
             }
-            else cout << "!! Out of range !!" << endl;
+            else cout << "!! Некорректное значение !!" << endl;
         }
-        else cout << "!! Incorrect value !!" << endl;
+        else cout << "!! Некорректное значение !!" << endl;
     }
     if (cs_id_to_edit.length() != 0) {
         out_cs(stoi(cs_id_to_edit) - 1, cs_vector[stoi(cs_id_to_edit) - 1].name,
@@ -518,47 +517,48 @@ void edit_cs() {
     else return;
 
     while (true) {
-        cout << "\nSelect parameter of pipe:\n1 - Name\n2 - Workshops\n3 - Workshops in work"
-        << "\n4 - Efficiency\n ~ ";
+        cout << "\nВыберите параметр КС:\n1 - Название\n2 - Кол-во заводов\n3 - Кол-во работающих заводов"
+        << "\n4 - Эффективность\n ~ ";
         getline(cin, cs_parameter_to_edit);
 
         if (int_check(cs_parameter_to_edit) == 1) {
             if (stoi(cs_parameter_to_edit) >= 1 && stoi(cs_parameter_to_edit) <= 4) break;
-            else cout << "!! Out of range !!" << endl;
+            else cout << "!! Значение должно быть в пределах (1, 4) !!" << endl;
         } 
-        else cout << "!! Incorrect value !!" << endl;
+        else cout << "!! Некорректное значение !!" << endl;
     }
 
     switch (stoi(cs_parameter_to_edit)) {
     case 1:
         while (true) {
-            cout << "Station name ~ ";
+            cout << "Название КС ~ ";
             getline(cin, new_cs_name);
 
             if (new_cs_name.length() > 0) break;
+            else cout << "!! Название не может быть пустым !!"; 
         }
         cs_vector[stoi(cs_id_to_edit)-1].name = new_cs_name;
         break;
     case 2:
         while(correct_input != 1) {
-            cout << "Workshops ~ ";
+            cout << "Кол-во заводов ~ ";
             getline(cin, new_cs_workshops);
 
             correct_input = int_check(new_cs_workshops);
 
-            if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
+            if (correct_input == 0) cout << "!! Некорректное значение !!" << endl;
         }
         cs_vector[stoi(cs_id_to_edit) - 1].workshops = stoi(new_cs_workshops);
         break;
     case 3:
         while (true) {
-            cout << "Workshops in work ~ ";
+            cout << "Кол-во работающих заводов ~ ";
             getline(cin, new_cs_workshops_in_work);
             correct_input = int_check(new_cs_workshops_in_work);
-            if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
+            if (correct_input == 0) cout << "!! Некорректное значение !!" << endl;
             else if (correct_input == 1) {
                 if (stoi(new_cs_workshops_in_work) > cs_vector[stoi(cs_id_to_edit) - 1].workshops) 
-                cout << "!! Number of workshops in work can't exceed the total number of workshops !!" << endl;
+                cout << "!! Кол-во рабочих заводов не может превышать общее кол-во заводов !!" << endl;
                 else break;
             }
         }
@@ -566,15 +566,15 @@ void edit_cs() {
         break;
     case 4:
         while(true) {
-            cout << "Efficiency in percentage ~ ";
+            cout << "Эффективность (%) ~ ";
             getline(cin, new_cs_efficiency);
 
             correct_input = int_check(new_cs_efficiency);
 
-            if (correct_input == 0) cout << "!! Incorrect value !!" << endl;
+            if (correct_input == 0) cout << "!! Некорректное значение !!" << endl;
             else if (correct_input == 1) {
                 if (stoi(new_cs_efficiency) >= 0 && stoi(new_cs_efficiency)<= 100) break;
-                else cout << "!! Percentage value should be between (0, 100) !!" << endl;
+                else cout << "!! Значение должно быть в пределах (0, 100) !!" << endl;
             }
         }
         cs_vector[stoi(cs_id_to_edit) - 1].efficiency = stoi(new_cs_efficiency);
@@ -597,12 +597,12 @@ void save_file() {
     string config_name, rewrite_status;
     bool rewrite_status_check{1};
 
-    cout << "\nFile name ~ ";
+    cout << "\nИмя файла ~ ";
     getline(cin, config_name);
 
         if (for_save_files(config_name+".txt") == 1) {
         while (true) {
-            cout << "Are sure you want to rewrite the file? [Y/N] ~ ";
+            cout << "Вы точно хотите заменить файл? [Y/N] ~ ";
             getline(cin, rewrite_status);
 
             if (y_or_n_check(rewrite_status) == 1){
@@ -613,7 +613,7 @@ void save_file() {
                 rewrite_status_check = 0;
                 break;
             } 
-            else cout << "Error while entering a variable!" << endl;
+            else cout << "!! Некорректное значение !!" << endl;
         }            
     }
 
@@ -639,7 +639,7 @@ int load_file() {
     int wordcount;
     bool file_load_suc_status;
 
-    cout << "File name ~ ";
+    cout << "Имя файла ~ ";
     getline(cin, loadname);
 
     loadfile.open(loadname + ".txt");
@@ -679,7 +679,7 @@ int load_file() {
     }
 
     else {
-        cout << "!! File with such name wasn't found !!" << endl;
+        cout << "!! Файл с таким именем не найден !!" << endl;
         return 0;
     }
 }
@@ -693,14 +693,14 @@ int menu() {
 
         bool menu_number_isdig{1};
 
-        cout << "\n1. Add Pipe" << endl;
-        cout << "2. Add Compressor station" << endl;
-        cout << "3. View object list" << endl;
-        cout << "4. Edit Pipe" << endl;
-        cout << "5. Edit Compressor station" << endl;
-        cout << "6. Save" << endl;
-        cout << "7. Load" << endl;
-        cout << "0. Exit" << endl;
+        cout << "\n1. Добавить Трубу" << endl;
+        cout << "2. Добавить Компрессорную Станцию" << endl;
+        cout << "3. Список всех объектов" << endl;
+        cout << "4. Редактировать Трубу" << endl;
+        cout << "5. Редактировать Компрессорную Станцию" << endl;
+        cout << "6. Сохранить" << endl;
+        cout << "7. Загрузить" << endl;
+        cout << "0. Выход" << endl;
         cout << "~ ";
 
         getline(cin, user_menu_insert);
@@ -717,17 +717,16 @@ int menu() {
                 if (stoi(user_menu_insert) <= 7 && stoi(user_menu_insert) >= 0) main_menu_flag = 0;
             }
 
-            else cout << "\n!! Incorrect value !!\n" << endl;
+            else cout << "\n!! Некорректное значение !!\n" << endl;
         }
 
-        else cout << "\n!! Incorrect value !!\n" << endl;
+        else cout << "\n!! Некорректное значение !!\n" << endl;
     }
     return stoi(user_menu_insert);
 }
 
 
 int main() {
-
     int user_choice_in_main_menu;
     bool program_cycle{1}, file_saved_status{1}, load_without_save{0}, success_load;
     string load_without_saving_string, exit_without_saving_string;
@@ -737,7 +736,7 @@ int main() {
 
         switch (user_choice_in_main_menu) {
             case 0:
-                if (file_saved_status == 0) cout << "Not saved" << endl;
+                if (file_saved_status == 0) cout << "!! Не сохранено !!" << endl;
                 program_cycle = 0;
                 break;
             case 1:
@@ -777,7 +776,7 @@ int main() {
                             load_without_save = 0;
                             break;
                         } 
-                        else cout << "!! Incorrect value !!" << endl;
+                        else cout << "!! Некорректное значение !!" << endl;
                     }
                 }
                 if (file_saved_status == 1 || load_without_save == 1) {        
